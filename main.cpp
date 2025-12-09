@@ -75,10 +75,11 @@ int main() {
 	}
 
 	// Run 10 rounds of simulation.
-	cout << "BOOTH SIMULATIONS:\n";
+	cout << "\n---BOOTH SIMULATIONS---\n";
 	for (int i = 0; i < NUM_ROUNDS; ++i) {
-		cout << "Time " << i + 1 << ":\n";
+		cout << "TIME " << i + 1 << ":\n";
 
+		cout << "* At the coffee booth:\n";
 		// Serve the customer at the front if the queue is not empty.
 		if (!coffeeBooth.empty()) {
 			cout << "\tServed " << coffeeBooth.front().name << " - " << coffeeBooth.front().order << "\n";
@@ -89,6 +90,19 @@ int main() {
 		int probability = rand() % 100 + 1;
 		if (probability <= 50) {
 			customerJoins(coffeeBooth);
+		}
+
+		cout << "* At the muffin booth:\n";
+		// Serve the customer at the front if the queue is not empty.
+		if (!muffinBooth.empty()) {
+			cout << "\tServed " << muffinBooth.front().name << " - " << muffinBooth.front().order << "\n";
+			muffinBooth.pop_front();
+		}
+
+		// 50% chance that someone joins the queue.
+		probability = rand() % 100 + 1;
+		if (probability <= 50) {
+			customerJoins(muffinBooth);
 		}
 	}
 
