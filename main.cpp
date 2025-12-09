@@ -8,6 +8,7 @@
 #include <ctime>
 #include <deque>
 #include <vector>
+#include <map>
 
 using namespace std;
 
@@ -27,6 +28,8 @@ const string MUFFIN_ORDERS[NUM_MUFFINS] = { "Blueberry", "Banana", "Apple", "Lem
 const int NUM_BRACELETS = 5;
 const string BRACELET_ORDERS[NUM_BRACELETS] = { "Chain", "Braided", "Charm", "Knotted", "Beaded" };
 
+const int NUM_PLUSHIES = 5;
+const string PLUSHIE_ORDERS[NUM_PLUSHIES] = { "Dog", "Cat", "Squid", "Hamster", "Turtle" };
 
 // Coffee node
 struct CoffeeNode {
@@ -69,11 +72,19 @@ void customerJoins(deque<MuffinNode>& muffinBooth) {
 }
 
 // Customer joins bracelet booth
-void customerJoins(vector<BraceletNode> braceletBooth) {
+void customerJoins(vector<BraceletNode>& braceletBooth) {
 	string randomName = NAMES[rand() % NUM_NAMES];
 	string randomOrder = BRACELET_ORDERS[rand() % NUM_BRACELETS];
 	braceletBooth.push_back(BraceletNode(randomName, randomOrder));
 	cout << "\tCustomer joins: " << braceletBooth.back().name << " - " << braceletBooth.back().order << " Bracelet\n";
+}
+
+void customerJoins(map<string, string>& plushieBooth) {
+	string randomName = NAMES[rand() % NUM_NAMES];
+	string randomOrder = PLUSHIE_ORDERS[rand() % NUM_PLUSHIES];
+	plushieBooth[randomName] = randomOrder;
+	cout << "\tCustomer joins: " << randomName << " - " << randomOrder << " Plushie\n";
+
 }
 
 int main() {
@@ -82,6 +93,7 @@ int main() {
 	list<CoffeeNode> coffeeBooth;		// Linked list for coffee booth.
 	deque<MuffinNode> muffinBooth;		// Deque for muffin booth.
 	vector<BraceletNode> braceletBooth;	// Vector for friendship bracelet booth.
+	map<string, string> plushieBooth;	// Map for plushie booth.
 
 	// Initialize the queue with 3 customers.
 	const int INIT_NUM_CUSTOMERS = 3;
@@ -99,6 +111,11 @@ int main() {
 	cout << "INITIAL BRACELET BOOTH:\n";
 	for (int i = 0; i < INIT_NUM_CUSTOMERS; ++i) {
 		customerJoins(braceletBooth);
+	}
+
+	cout << "INITIAL PLUSHIE BOOTH:\n";
+	for (int i = 0; i < INIT_NUM_CUSTOMERS; ++i) {
+		customerJoins(plushieBooth);
 	}
 
 	// Run 10 rounds of simulation.
@@ -143,6 +160,20 @@ int main() {
 		probability = rand() % 100 + 1;
 		if (probability <= 50) {
 			customerJoins(braceletBooth);
+		}
+
+		cout << "* At the plushie booth:\n";
+		// Serve the customer at the front if the queue is not empty.
+		if (!plushieBooth.empty()) {
+
+			cout << "\tServed " << plushieBooth.begin()->first << " - " << plushieBooth.begin()->second << " Plushie\n";
+			plushieBooth.erase(plushieBooth.begin());
+		}
+
+		// 50% chance that someone joins the queue.
+		probability = rand() % 100 + 1;
+		if (probability <= 50) {
+			customerJoins(plushieBooth);
 		}
 	}
 
