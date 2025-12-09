@@ -31,6 +31,7 @@ void customerJoins(list<CoffeeNode>& coffeeBooth) {
 	string randomName = NAMES[rand() % NUM_NAMES];
 	string randomOrder = COFFEE_ORDERS[rand() % NUM_COFFEES];
 	coffeeBooth.push_back(CoffeeNode(randomName, randomOrder));
+	cout << "\tCustomer Joins: " << coffeeBooth.back().name << " - " << coffeeBooth.back().order << "\n";
 }
 
 int main() {
@@ -38,17 +39,19 @@ int main() {
 	list<CoffeeNode> coffeeBooth;	// Linked list for coffee orders.
 
 	// Initialize the queue with 3 customers.
+	cout << "INITIAL COFFEE QUEUE:\n";
 	for (int i = 0; i < 3; ++i) {
 		customerJoins(coffeeBooth);
 	}
 
 	// Run 10 rounds of simulation.
+	cout << "COFFEE BOOTH SIMULATION:\n";
 	for (int i = 0; i < NUM_ROUNDS; ++i) {
 		cout << "Time " << i + 1 << ":\n";
 
 		// Serve the customer at the front if the queue is not empty.
 		if (!coffeeBooth.empty()) {
-			cout << "Served " << coffeeBooth.front().name << " - " << coffeeBooth.front().order << "\n";
+			cout << "\tServed " << coffeeBooth.front().name << " - " << coffeeBooth.front().order << "\n";
 			coffeeBooth.pop_front();
 		}
 
