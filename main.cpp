@@ -70,7 +70,6 @@ void serveCustomer(vector<BraceletNode>& braceletBooth);
 void chanceCustomerJoins(vector<BraceletNode>& braceletBooth);
 void printBooth(const vector<BraceletNode>& braceletBooth);
 
-
 // Plushie booth operations
 string customerJoins(map<string, string>& plushieBooth);
 void serveCustomer(map<string, string>& plushieBooth);
@@ -146,22 +145,22 @@ int main() {
 	return 0;
 }
 
-// Coffee booth operations
+// COFFEE BOOTH OPERATIONS
 
-void customerJoins(list<CoffeeNode>& coffeeBooth) {
+void customerJoins(list<CoffeeNode>& coffeeBooth) {			// Add a customer to coffee booth.
 	string randomName = NAMES[rand() % NUM_NAMES];
 	string randomOrder = COFFEE_ORDERS[rand() % NUM_COFFEES];
 	coffeeBooth.push_back(CoffeeNode(randomName, randomOrder));
 }
 
-void serveCustomer(list<CoffeeNode>& coffeeBooth) {
+void serveCustomer(list<CoffeeNode>& coffeeBooth) {			// Serve a customer in the coffee booth.
 	if (!coffeeBooth.empty()) {
 		cout << "\tServed: [" << coffeeBooth.front().name << ", " << coffeeBooth.front().order << " Coffee]\n";
 		coffeeBooth.pop_front();
 	}
 }
 
-void chanceCustomerJoins(list<CoffeeNode>& coffeeBooth) {
+void chanceCustomerJoins(list<CoffeeNode>& coffeeBooth) {	// 50% chance to add a customer to the coffee booth.
 	int probability = rand() % 100 + 1;
 	if (probability <= 50) {
 		customerJoins(coffeeBooth);
@@ -169,7 +168,7 @@ void chanceCustomerJoins(list<CoffeeNode>& coffeeBooth) {
 	}
 }
 
-void printBooth(const list<CoffeeNode>& coffeeBooth) {
+void printBooth(const list<CoffeeNode>& coffeeBooth) {		// Print the coffee booth.
 	if (!coffeeBooth.empty()) {
 		for (const auto& c : coffeeBooth) {
 			cout << "\t>> [" << c.name << ", " << c.order << " Coffee]\n";
@@ -180,22 +179,22 @@ void printBooth(const list<CoffeeNode>& coffeeBooth) {
 	}
 }
 
-// Muffin booth operations
+// MUFFIN BOOTH OPERATIONS
 
-void customerJoins(deque<MuffinNode>& muffinBooth) {
+void customerJoins(deque<MuffinNode>& muffinBooth) {		// Add a customer to the muffin booth.
 	string randomName = NAMES[rand() % NUM_NAMES];
 	string randomOrder = MUFFIN_ORDERS[rand() % NUM_MUFFINS];
 	muffinBooth.push_back(MuffinNode(randomName, randomOrder));
 }
 
-void serveCustomer(deque<MuffinNode>& muffinBooth) {
+void serveCustomer(deque<MuffinNode>& muffinBooth) {		// Serve a customer in the muffin booth.
 	if (!muffinBooth.empty()) {
 		cout << "\tServed: [" << muffinBooth.front().name << ", " << muffinBooth.front().order << " Muffin]\n";
 		muffinBooth.pop_front();
 	}
 }
 
-void chanceCustomerJoins(deque<MuffinNode>& muffinBooth) {
+void chanceCustomerJoins(deque<MuffinNode>& muffinBooth) {	// 50% chance to add a customer to the muffin booth.
 	int probability = rand() % 100 + 1;
 	if (probability <= 50) {
 		customerJoins(muffinBooth);
@@ -203,7 +202,7 @@ void chanceCustomerJoins(deque<MuffinNode>& muffinBooth) {
 	}
 }
 
-void printBooth(const deque<MuffinNode>& muffinBooth) {
+void printBooth(const deque<MuffinNode>& muffinBooth) {		// Print the muffin booth.
 	if (!muffinBooth.empty()) {
 		for (const auto& m : muffinBooth) {
 			cout << "\t>> [" << m.name << ", " << m.order << " Muffin]\n";
@@ -214,22 +213,22 @@ void printBooth(const deque<MuffinNode>& muffinBooth) {
 	}
 }
 
-// Bracelet booth operations
+// BRACELET BOOTH OPERATIONS
 
-void customerJoins(vector<BraceletNode>& braceletBooth) {
+void customerJoins(vector<BraceletNode>& braceletBooth) {		// Add a customer to the bracelet booth.
 	string randomName = NAMES[rand() % NUM_NAMES];
 	string randomOrder = BRACELET_ORDERS[rand() % NUM_BRACELETS];
 	braceletBooth.push_back(BraceletNode(randomName, randomOrder));
 }
 
-void serveCustomer(vector<BraceletNode>& braceletBooth) {
+void serveCustomer(vector<BraceletNode>& braceletBooth) {		// Serve a customer in the bracelet booth.
 	if (!braceletBooth.empty()) {
 		cout << "\tServed: [" << braceletBooth.front().name << ", " << braceletBooth.front().order << " Bracelet]\n";
 		braceletBooth.erase(braceletBooth.begin());
 	}
 }
 
-void chanceCustomerJoins(vector<BraceletNode>& braceletBooth) {
+void chanceCustomerJoins(vector<BraceletNode>& braceletBooth) {	// 50% chance to add a customer to the bracelet booth.
 	int probability = rand() % 100 + 1;
 	if (probability <= 50) {
 		customerJoins(braceletBooth);
@@ -237,7 +236,7 @@ void chanceCustomerJoins(vector<BraceletNode>& braceletBooth) {
 	}
 }
 
-void printBooth(const vector<BraceletNode>& braceletBooth) {
+void printBooth(const vector<BraceletNode>& braceletBooth) {	// Print the bracelet booth.
 	if (!braceletBooth.empty()) {
 		for (const auto& b : braceletBooth) {
 			cout << "\t>> [" << b.name << ", " << b.order << " Bracelet]\n";
@@ -248,23 +247,23 @@ void printBooth(const vector<BraceletNode>& braceletBooth) {
 	}
 }
 
-// Plushie booth operations
+// PLUSHIE BOOTH OPERATIONS
 
-string customerJoins(map<string, string>& plushieBooth) {
+string customerJoins(map<string, string>& plushieBooth) {		// Add a customer to the plushie booth.
 	string randomName = NAMES[rand() % NUM_NAMES];
 	string randomOrder = PLUSHIE_ORDERS[rand() % NUM_PLUSHIES];
 	plushieBooth[randomName] = randomOrder;
 	return randomName;
 }
 
-void serveCustomer(map<string, string>& plushieBooth) {
+void serveCustomer(map<string, string>& plushieBooth) {			// Serve a customer in the plushie  booth.
 	if (!plushieBooth.empty()) {
 		cout << "\tServed: [" << plushieBooth.begin()->first << ", " << plushieBooth.begin()->second << " Plushie]\n";
 		plushieBooth.erase(plushieBooth.begin());
 	}
 }
 
-void chanceCustomerJoins(map<string, string>& plushieBooth) {
+void chanceCustomerJoins(map<string, string>& plushieBooth) {	// 50% chance to add a customer to the plushie booth.
 	int probability = rand() % 100 + 1;
 	if (probability <= 50) {
 		string customer = customerJoins(plushieBooth);
@@ -272,7 +271,7 @@ void chanceCustomerJoins(map<string, string>& plushieBooth) {
 	}
 }
 
-void printBooth(const map<string, string>& plushieBooth) {
+void printBooth(const map<string, string>& plushieBooth) {		// Print the plushie booth.
 	if (!plushieBooth.empty()) {
 		for (const auto& pair : plushieBooth) {
 			cout << "\t>> [" << pair.first << ", " << pair.second << " Plushie]\n";
