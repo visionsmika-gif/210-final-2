@@ -27,21 +27,36 @@ struct CoffeeNode {
 	CoffeeNode(const string& n, const string& o) : name(n), order(o) {}
 };
 
+void customerJoins(list<CoffeeNode>& coffeeBooth) {
+	string randomName = NAMES[rand() % NUM_NAMES];
+	string randomOrder = COFFEE_ORDERS[rand() % NUM_COFFEES];
+	coffeeBooth.push_back(CoffeeNode(randomName, randomOrder));
+}
+
 int main() {
 	srand(time(0));
-	list<CoffeeNode> coffeeBooth;	// Linked list for coffee orders
+	list<CoffeeNode> coffeeBooth;	// Linked list for coffee orders.
 
-	// Initialize the queue with 3 customers
+	// Initialize the queue with 3 customers.
 	for (int i = 0; i < 3; ++i) {
-		string randomName = NAMES[rand() % NUM_NAMES];
-		string randomOrder = COFFEE_ORDERS[rand() % NUM_COFFEES];
-
-		coffeeBooth.push_back(CoffeeNode(randomName, randomOrder));
+		customerJoins(coffeeBooth);
 	}
 
-	// 10 rounds of simultion
+	// Run 10 rounds of simulation.
 	for (int i = 0; i < NUM_ROUNDS; ++i) {
 		cout << "Time " << i + 1 << ":\n";
+
+		// Serve the customer at the front if the queue is not empty.
+		if (!coffeeBooth.empty()) {
+			cout << "Served " << coffeeBooth.front().name << " - " << coffeeBooth.front().order << "\n";
+			coffeeBooth.pop_front();
+		}
+
+		// 50% chance that someone joins the queue.
+		int probability = rand() % 100 + 1;
+		if (probability <= 50) {
+			customerJoins(coffeeBooth);
+		}
 	}
 
 	return 0;
