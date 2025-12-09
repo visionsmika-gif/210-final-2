@@ -9,7 +9,7 @@ using namespace std;
 
 // Data sets
 const string NAMES[] = { "Liam", "Olivia", "Jasper", "Delilah", "Theodore", "Amelia", "Noah", "Emma", "Knox", "Sloane",
-							 "Zoe", "Flynn", "Saoirse", "Maxton", "Scarlett", "Lucian", "Aisha", "Kairi", "Zariah", "Nova" };
+						 "Zoe", "Flynn", "Saoirse", "Maxton", "Scarlett", "Lucian", "Aisha", "Kairi", "Zariah", "Nova" };
 
 const string COFFEE_ORDERS[] = { "Latte", "Cappuccino", "Mocha", "Americano", "Espresso" };
 
@@ -17,11 +17,12 @@ const string COFFEE_ORDERS[] = { "Latte", "Cappuccino", "Mocha", "Americano", "E
 struct CoffeeNode {
 	string name;
 	string order;
+
+	CoffeeNode(const string& n, const string& o) : name(n), order(o) {}
 };
 
 int main() {
-	list<CoffeeNode> coffeeBooth;	// Linked list
-
+	list<CoffeeNode> coffeeBooth;	// Linked list for coffee orders
 
 	return 0;
 }
