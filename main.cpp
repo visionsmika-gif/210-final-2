@@ -4,14 +4,20 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
+const int NUM_ROUNDS = 10;
+
 // Data sets
-const string NAMES[] = { "Liam", "Olivia", "Jasper", "Delilah", "Theodore", "Amelia", "Noah", "Emma", "Knox", "Sloane",
+const int NUM_NAMES = 20;
+const string NAMES[NUM_NAMES] = { "Liam", "Olivia", "Jasper", "Delilah", "Theodore", "Amelia", "Noah", "Emma", "Knox", "Sloane",
 						 "Zoe", "Flynn", "Saoirse", "Maxton", "Scarlett", "Lucian", "Aisha", "Kairi", "Zariah", "Nova" };
 
-const string COFFEE_ORDERS[] = { "Latte", "Cappuccino", "Mocha", "Americano", "Espresso" };
+const int NUM_COFFEES = 5;
+const string COFFEE_ORDERS[NUM_COFFEES] = { "Latte", "Cappuccino", "Mocha", "Americano", "Espresso" };
 
 // Coffee node
 struct CoffeeNode {
@@ -22,7 +28,21 @@ struct CoffeeNode {
 };
 
 int main() {
+	srand(time(0));
 	list<CoffeeNode> coffeeBooth;	// Linked list for coffee orders
+
+	// Initialize the queue with 3 customers
+	for (int i = 0; i < 3; ++i) {
+		string randomName = NAMES[rand() % NUM_NAMES];
+		string randomOrder = COFFEE_ORDERS[rand() % NUM_COFFEES];
+
+		coffeeBooth.push_back(CoffeeNode(randomName, randomOrder));
+	}
+
+	// 10 rounds of simultion
+	for (int i = 0; i < NUM_ROUNDS; ++i) {
+		cout << "Time " << i + 1 << ":\n";
+	}
 
 	return 0;
 }
