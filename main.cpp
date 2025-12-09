@@ -96,6 +96,11 @@ int main() {
 		customerJoins(muffinBooth);
 	}
 
+	cout << "INITIAL BRACELET BOOTH:\n";
+	for (int i = 0; i < INIT_NUM_CUSTOMERS; ++i) {
+		customerJoins(braceletBooth);
+	}
+
 	// Run 10 rounds of simulation.
 	cout << "\n---BOOTH SIMULATIONS---\n";
 	for (int i = 0; i < NUM_ROUNDS; ++i) {
