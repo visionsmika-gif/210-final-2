@@ -56,63 +56,26 @@ struct BraceletNode {
 void customerJoins(list<CoffeeNode>& coffeeBooth);
 void serveCustomer(list<CoffeeNode>& coffeeBooth);
 void chanceCustomerJoins(list<CoffeeNode>& coffeeBooth);
-void printBooth(const list<CoffeeNode>& coffeeBooth) {
-	if (!coffeeBooth.empty()) {
-		for (const auto& c : coffeeBooth) {
-			cout << "\t[" << c.name << ", " << c.order << " Coffee]\n";
-		}
-	}
-	else {
-		cout << "\tEmpty\n";
-	}
-}
+void printBooth(const list<CoffeeNode>& coffeeBooth);
 
 // Muffin booth operations
 void customerJoins(deque<MuffinNode>& muffinBooth);
 void serveCustomer(deque<MuffinNode>& muffinBooth);
 void chanceCustomerJoins(deque<MuffinNode>& muffinBooth);
-void printBooth(const deque<MuffinNode>& muffinBooth) {
-	if (!muffinBooth.empty()) {
-		for (const auto& m : muffinBooth) {
-			cout << "\t[" << m.name << ", " << m.order << " Muffin]\n";
-		}
-	}
-	else {
-		cout << "\tEmpty\n";
-	}
-}
+void printBooth(const deque<MuffinNode>& muffinBooth);
 
 // Bracelet booth operations
 void customerJoins(vector<BraceletNode>& braceletBooth);
 void serveCustomer(vector<BraceletNode>& braceletBooth);
 void chanceCustomerJoins(vector<BraceletNode>& braceletBooth);
-void printBooth(const vector<BraceletNode>& braceletBooth) {
-	if (!braceletBooth.empty()) {
-		for (const auto& b : braceletBooth) {
-			cout << "\t[" << b.name << ", " << b.order << " Bracelet]\n";
-		}
-	}
-	else {
-		cout << "\tEmpty\n";
-	}
-}
+void printBooth(const vector<BraceletNode>& braceletBooth);
 
 
 // Plushie booth operations
 string customerJoins(map<string, string>& plushieBooth);
 void serveCustomer(map<string, string>& plushieBooth);
 void chanceCustomerJoins(map<string, string>& plushieBooth);
-void printBooth(const map<string, string>& plushieBooth) {
-	if (!plushieBooth.empty()) {
-		for (const auto& pair : plushieBooth) {
-			cout << "\t[" << pair.first << ", " << pair.second << " Plushie]\n";
-		}
-	}
-	else {
-		cout << "\tEmpty\n";
-	}
-}
-
+void printBooth(const map<string, string>& plushieBooth);
 
 int main() {
 	srand(time(0));
@@ -148,38 +111,42 @@ int main() {
 		cout << "------- TIME " << i + 1 << " ------- \n";
 
 		// Coffee booth
-		cout << "* At the coffee booth:\n";
+		cout << "* At the COFFEE BOOTH:\n";
 		serveCustomer(coffeeBooth);				// Serve the customer at the front if the queue is not empty.
 		chanceCustomerJoins(coffeeBooth);		// 50% chance that a customer joins the queue.
 		cout << "Resulting queue:\n";
 		printBooth(coffeeBooth);
+		cout << "\n";
 
 		// Muffin booth
-		cout << "* At the muffin booth:\n";
+		cout << "* At the MUFFIN BOOTH:\n";
 		serveCustomer(muffinBooth);				// Serve the customer at the front if the queue is not empty.
 		chanceCustomerJoins(muffinBooth);		// 50% chance that a customer joins the queue.
 		cout << "Resulting queue:\n";
 		printBooth(muffinBooth);
+		cout << "\n";
 
 		// Bracelet booth
-		cout << "* At the bracelet booth:\n";
+		cout << "* At the BRACELET BOOTH:\n";
 		serveCustomer(braceletBooth);			// Serve the customer at the front if the queue is not empty.
 		chanceCustomerJoins(braceletBooth);		//50% chance that a customer joins the queue.
 		cout << "Resulting queue:\n";
 		printBooth(braceletBooth);
+		cout << "\n";
 
 		// Plushie booth
-		cout << "* At the plushie booth:\n";
+		cout << "* At the PLUSHIE BOOTH:\n";
 		serveCustomer(plushieBooth);			// Serve the customer at the front if the queue is not empty.
 		chanceCustomerJoins(plushieBooth);		// 50% chance that a customer joins the queue.
 		cout << "Resulting queue:\n";
 		printBooth(plushieBooth);
-
 		cout << "\n";
 	}
 
 	return 0;
 }
+
+// Coffee booth operations
 
 void customerJoins(list<CoffeeNode>& coffeeBooth) {
 	string randomName = NAMES[rand() % NUM_NAMES];
@@ -202,6 +169,19 @@ void chanceCustomerJoins(list<CoffeeNode>& coffeeBooth) {
 	}
 }
 
+void printBooth(const list<CoffeeNode>& coffeeBooth) {
+	if (!coffeeBooth.empty()) {
+		for (const auto& c : coffeeBooth) {
+			cout << "\t>> [" << c.name << ", " << c.order << " Coffee]\n";
+		}
+	}
+	else {
+		cout << "\tEmpty\n";
+	}
+}
+
+// Muffin booth operations
+
 void customerJoins(deque<MuffinNode>& muffinBooth) {
 	string randomName = NAMES[rand() % NUM_NAMES];
 	string randomOrder = MUFFIN_ORDERS[rand() % NUM_MUFFINS];
@@ -222,6 +202,19 @@ void chanceCustomerJoins(deque<MuffinNode>& muffinBooth) {
 		cout << "\tCustomer joins: [" << muffinBooth.back().name << ", " << muffinBooth.back().order << " Muffin]\n";
 	}
 }
+
+void printBooth(const deque<MuffinNode>& muffinBooth) {
+	if (!muffinBooth.empty()) {
+		for (const auto& m : muffinBooth) {
+			cout << "\t>> [" << m.name << ", " << m.order << " Muffin]\n";
+		}
+	}
+	else {
+		cout << "\tEmpty\n";
+	}
+}
+
+// Bracelet booth operations
 
 void customerJoins(vector<BraceletNode>& braceletBooth) {
 	string randomName = NAMES[rand() % NUM_NAMES];
@@ -244,6 +237,19 @@ void chanceCustomerJoins(vector<BraceletNode>& braceletBooth) {
 	}
 }
 
+void printBooth(const vector<BraceletNode>& braceletBooth) {
+	if (!braceletBooth.empty()) {
+		for (const auto& b : braceletBooth) {
+			cout << "\t>> [" << b.name << ", " << b.order << " Bracelet]\n";
+		}
+	}
+	else {
+		cout << "\tEmpty\n";
+	}
+}
+
+// Plushie booth operations
+
 string customerJoins(map<string, string>& plushieBooth) {
 	string randomName = NAMES[rand() % NUM_NAMES];
 	string randomOrder = PLUSHIE_ORDERS[rand() % NUM_PLUSHIES];
@@ -263,5 +269,16 @@ void chanceCustomerJoins(map<string, string>& plushieBooth) {
 	if (probability <= 50) {
 		string customer = customerJoins(plushieBooth);
 		cout << "\tCustomer joins: [" << customer << ", " << plushieBooth[customer] << " Plushie]\n";
+	}
+}
+
+void printBooth(const map<string, string>& plushieBooth) {
+	if (!plushieBooth.empty()) {
+		for (const auto& pair : plushieBooth) {
+			cout << "\t>> [" << pair.first << ", " << pair.second << " Plushie]\n";
+		}
+	}
+	else {
+		cout << "\tEmpty\n";
 	}
 }
