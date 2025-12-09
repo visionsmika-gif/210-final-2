@@ -57,11 +57,13 @@ void customerJoins(list<CoffeeNode>& coffeeBooth);
 void serveCustomer(list<CoffeeNode>& coffeeBooth);
 void chanceCustomerJoins(list<CoffeeNode>& coffeeBooth);
 void printBooth(const list<CoffeeNode>& coffeeBooth) {
-	cout << "Coffee booth queue:\n";
 	if (!coffeeBooth.empty()) {
 		for (const auto& c : coffeeBooth) {
-			cout << c.name << ", " << c.order << "]\n";
+			cout << "\t[" << c.name << ", " << c.order << " Coffee]\n";
 		}
+	}
+	else {
+		cout << "\tEmpty\n";
 	}
 }
 
@@ -69,16 +71,48 @@ void printBooth(const list<CoffeeNode>& coffeeBooth) {
 void customerJoins(deque<MuffinNode>& muffinBooth);
 void serveCustomer(deque<MuffinNode>& muffinBooth);
 void chanceCustomerJoins(deque<MuffinNode>& muffinBooth);
+void printBooth(const deque<MuffinNode>& muffinBooth) {
+	if (!muffinBooth.empty()) {
+		for (const auto& m : muffinBooth) {
+			cout << "\t[" << m.name << ", " << m.order << " Muffin]\n";
+		}
+	}
+	else {
+		cout << "\tEmpty\n";
+	}
+}
 
 // Bracelet booth operations
 void customerJoins(vector<BraceletNode>& braceletBooth);
 void serveCustomer(vector<BraceletNode>& braceletBooth);
 void chanceCustomerJoins(vector<BraceletNode>& braceletBooth);
+void printBooth(const vector<BraceletNode>& braceletBooth) {
+	if (!braceletBooth.empty()) {
+		for (const auto& b : braceletBooth) {
+			cout << "\t[" << b.name << ", " << b.order << " Bracelet]\n";
+		}
+	}
+	else {
+		cout << "\tEmpty\n";
+	}
+}
+
 
 // Plushie booth operations
 string customerJoins(map<string, string>& plushieBooth);
 void serveCustomer(map<string, string>& plushieBooth);
 void chanceCustomerJoins(map<string, string>& plushieBooth);
+void printBooth(const map<string, string>& plushieBooth) {
+	if (!plushieBooth.empty()) {
+		for (const auto& pair : plushieBooth) {
+			cout << "\t[" << pair.first << ", " << pair.second << " Plushie]\n";
+		}
+	}
+	else {
+		cout << "\tEmpty\n";
+	}
+}
+
 
 int main() {
 	srand(time(0));
@@ -97,12 +131,19 @@ int main() {
 		customerJoins(braceletBooth);
 		customerJoins(plushieBooth);
 	}
+
+	// Print the initial state of each booth.
 	cout << "Initial coffee booth:\n";
 	printBooth(coffeeBooth);
-
+	cout << "Initial muffin booth:\n";
+	printBooth(muffinBooth);
+	cout << "Initial bracelet booth:\n";
+	printBooth(braceletBooth);
+	cout << "Initial plushie booth:\n";
+	printBooth(plushieBooth);
 
 	// Run 10 rounds of simulation.
-	cout << "==== BOOTH SIMULATIONS ====\n\n";
+	cout << "\n==== BOOTH SIMULATIONS ====\n\n";
 	for (int i = 0; i < NUM_ROUNDS; ++i) {
 		cout << "------- TIME " << i + 1 << " ------- \n";
 
@@ -110,21 +151,29 @@ int main() {
 		cout << "* At the coffee booth:\n";
 		serveCustomer(coffeeBooth);				// Serve the customer at the front if the queue is not empty.
 		chanceCustomerJoins(coffeeBooth);		// 50% chance that a customer joins the queue.
+		cout << "Resulting queue:\n";
+		printBooth(coffeeBooth);
 
 		// Muffin booth
 		cout << "* At the muffin booth:\n";
 		serveCustomer(muffinBooth);				// Serve the customer at the front if the queue is not empty.
 		chanceCustomerJoins(muffinBooth);		// 50% chance that a customer joins the queue.
+		cout << "Resulting queue:\n";
+		printBooth(muffinBooth);
 
 		// Bracelet booth
 		cout << "* At the bracelet booth:\n";
 		serveCustomer(braceletBooth);			// Serve the customer at the front if the queue is not empty.
 		chanceCustomerJoins(braceletBooth);		//50% chance that a customer joins the queue.
+		cout << "Resulting queue:\n";
+		printBooth(braceletBooth);
 
 		// Plushie booth
 		cout << "* At the plushie booth:\n";
 		serveCustomer(plushieBooth);			// Serve the customer at the front if the queue is not empty.
 		chanceCustomerJoins(plushieBooth);		// 50% chance that a customer joins the queue.
+		cout << "Resulting queue:\n";
+		printBooth(plushieBooth);
 
 		cout << "\n";
 	}
