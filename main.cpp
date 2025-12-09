@@ -35,7 +35,6 @@ const string PLUSHIE_ORDERS[NUM_PLUSHIES] = { "Dog", "Cat", "Squid", "Hamster", 
 struct CoffeeNode {
 	string name;
 	string order;
-
 	CoffeeNode(const string& n, const string& o) : name(n), order(o) {}
 };
 
@@ -43,7 +42,6 @@ struct CoffeeNode {
 struct MuffinNode {
 	string name;
 	string order;
-
 	MuffinNode(const string& n, const string& o) : name(n), order(o) {}
 };
 
@@ -51,7 +49,6 @@ struct MuffinNode {
 struct BraceletNode {
 	string name;
 	string order;
-
 	BraceletNode(const string& n, const string& o) : name(n), order(o) {}
 };
 
@@ -61,6 +58,20 @@ void customerJoins(list<CoffeeNode>& coffeeBooth) {
 	string randomOrder = COFFEE_ORDERS[rand() % NUM_COFFEES];
 	coffeeBooth.push_back(CoffeeNode(randomName, randomOrder));
 	cout << "\tCustomer joins: " << coffeeBooth.back().name << " - " << coffeeBooth.back().order << " Coffee\n";
+}
+
+void serveCustomer(list<CoffeeNode>& coffeeBooth) {
+	if (!coffeeBooth.empty()) {
+		cout << "\tServed " << coffeeBooth.front().name << " - " << coffeeBooth.front().order << " Coffee\n";
+		coffeeBooth.pop_front();
+	}
+}
+
+void chanceCustomerJoins(list<CoffeeNode>& coffeeBooth) {
+	int probability = rand() % 100 + 1;
+	if (probability <= 50) {
+		customerJoins(coffeeBooth);
+	}
 }
 
 // Customer joins muffin booth
@@ -79,23 +90,25 @@ void customerJoins(vector<BraceletNode>& braceletBooth) {
 	cout << "\tCustomer joins: " << braceletBooth.back().name << " - " << braceletBooth.back().order << " Bracelet\n";
 }
 
+// Customer joins plushie booth
 void customerJoins(map<string, string>& plushieBooth) {
 	string randomName = NAMES[rand() % NUM_NAMES];
 	string randomOrder = PLUSHIE_ORDERS[rand() % NUM_PLUSHIES];
 	plushieBooth[randomName] = randomOrder;
 	cout << "\tCustomer joins: " << randomName << " - " << randomOrder << " Plushie\n";
-
 }
 
 int main() {
 	srand(time(0));
 	const int NUM_BOOTHS = 2;
+
+	// Booths
 	list<CoffeeNode> coffeeBooth;		// Linked list for coffee booth.
 	deque<MuffinNode> muffinBooth;		// Deque for muffin booth.
 	vector<BraceletNode> braceletBooth;	// Vector for friendship bracelet booth.
 	map<string, string> plushieBooth;	// Map for plushie booth.
 
-	// Initialize the queue with 3 customers.
+	// Initialize each booth with 3 customers.
 	const int INIT_NUM_CUSTOMERS = 3;
 
 	cout << "INITIAL COFFEE BOOTH:\n";
@@ -123,12 +136,11 @@ int main() {
 	for (int i = 0; i < NUM_ROUNDS; ++i) {
 		cout << "TIME " << i + 1 << ":\n";
 
+		// Coffee booth
 		cout << "* At the coffee booth:\n";
 		// Serve the customer at the front if the queue is not empty.
-		if (!coffeeBooth.empty()) {
-			cout << "\tServed " << coffeeBooth.front().name << " - " << coffeeBooth.front().order << " Coffee\n";
-			coffeeBooth.pop_front();
-		}
+		serveCustomer(coffeeBooth);
+		chanceCustomerJoins(coffeeBooth);
 
 		// 50% chance that someone joins the queue.
 		int probability = rand() % 100 + 1;
