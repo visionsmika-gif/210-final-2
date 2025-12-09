@@ -25,7 +25,7 @@ const int NUM_MUFFINS = 5;
 const string MUFFIN_ORDERS[NUM_MUFFINS] = { "Blueberry", "Banana", "Apple", "Lemon", "Cranberry" };
 
 const int NUM_BRACELETS = 5;
-const string BRACELET_ORDERS[NUM_BRACELETS] = { "Blueberry", "Banana", "Apple", "Lemon", "Cranberry" };
+const string BRACELET_ORDERS[NUM_BRACELETS] = { "Chain", "Braided", "Charm", "Knotted", "Beaded" };
 
 
 // Coffee node
@@ -57,7 +57,7 @@ void customerJoins(list<CoffeeNode>& coffeeBooth) {
 	string randomName = NAMES[rand() % NUM_NAMES];
 	string randomOrder = COFFEE_ORDERS[rand() % NUM_COFFEES];
 	coffeeBooth.push_back(CoffeeNode(randomName, randomOrder));
-	cout << "\tCustomer joins: " << coffeeBooth.back().name << " - " << coffeeBooth.back().order << "\n";
+	cout << "\tCustomer joins: " << coffeeBooth.back().name << " - " << coffeeBooth.back().order << " Coffee\n";
 }
 
 // Customer joins muffin booth
@@ -65,15 +65,15 @@ void customerJoins(deque<MuffinNode>& muffinBooth) {
 	string randomName = NAMES[rand() % NUM_NAMES];
 	string randomOrder = MUFFIN_ORDERS[rand() % NUM_MUFFINS];
 	muffinBooth.push_back(MuffinNode(randomName, randomOrder));
-	cout << "\tCustomer joins: " << muffinBooth.back().name << " - " << muffinBooth.back().order << "\n";
+	cout << "\tCustomer joins: " << muffinBooth.back().name << " - " << muffinBooth.back().order << " Muffin\n";
 }
 
 // Customer joins bracelet booth
 void customerJoins(vector<BraceletNode> braceletBooth) {
 	string randomName = NAMES[rand() % NUM_NAMES];
-	string randomOrder = MUFFIN_ORDERS[rand() % NUM_MUFFINS];
+	string randomOrder = BRACELET_ORDERS[rand() % NUM_BRACELETS];
 	braceletBooth.push_back(BraceletNode(randomName, randomOrder));
-	cout << "\tCustomer joins: " << braceletBooth.back().name << " - " << braceletBooth.back().order << "\n";
+	cout << "\tCustomer joins: " << braceletBooth.back().name << " - " << braceletBooth.back().order << " Bracelet\n";
 }
 
 int main() {
@@ -104,7 +104,7 @@ int main() {
 		cout << "* At the coffee booth:\n";
 		// Serve the customer at the front if the queue is not empty.
 		if (!coffeeBooth.empty()) {
-			cout << "\tServed " << coffeeBooth.front().name << " - " << coffeeBooth.front().order << "\n";
+			cout << "\tServed " << coffeeBooth.front().name << " - " << coffeeBooth.front().order << " Coffee\n";
 			coffeeBooth.pop_front();
 		}
 
@@ -117,7 +117,7 @@ int main() {
 		cout << "* At the muffin booth:\n";
 		// Serve the customer at the front if the queue is not empty.
 		if (!muffinBooth.empty()) {
-			cout << "\tServed " << muffinBooth.front().name << " - " << muffinBooth.front().order << " Muffin \n";
+			cout << "\tServed " << muffinBooth.front().name << " - " << muffinBooth.front().order << " Muffin\n";
 			muffinBooth.pop_front();
 		}
 
