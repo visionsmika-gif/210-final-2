@@ -7,6 +7,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <deque>
+#include <vector>
 
 using namespace std;
 
@@ -23,6 +24,10 @@ const string COFFEE_ORDERS[NUM_COFFEES] = { "Latte", "Cappuccino", "Mocha", "Ame
 const int NUM_MUFFINS = 5;
 const string MUFFIN_ORDERS[NUM_MUFFINS] = { "Blueberry", "Banana", "Apple", "Lemon", "Cranberry" };
 
+const int NUM_BRACELETS = 5;
+const string BRACELET_ORDERS[NUM_BRACELETS] = { "Blueberry", "Banana", "Apple", "Lemon", "Cranberry" };
+
+
 // Coffee node
 struct CoffeeNode {
 	string name;
@@ -37,6 +42,14 @@ struct MuffinNode {
 	string order;
 
 	MuffinNode(const string& n, const string& o) : name(n), order(o) {}
+};
+
+// Bracelet node
+struct BraceletNode {
+	string name;
+	string order;
+
+	BraceletNode(const string& n, const string& o) : name(n), order(o) {}
 };
 
 // Customer joins coffee booth
@@ -55,11 +68,20 @@ void customerJoins(deque<MuffinNode>& muffinBooth) {
 	cout << "\tCustomer joins: " << muffinBooth.back().name << " - " << muffinBooth.back().order << "\n";
 }
 
+// Customer joins bracelet booth
+void customerJoins(vector<BraceletNode> braceletBooth) {
+	string randomName = NAMES[rand() % NUM_NAMES];
+	string randomOrder = MUFFIN_ORDERS[rand() % NUM_MUFFINS];
+	braceletBooth.push_back(BraceletNode(randomName, randomOrder));
+	cout << "\tCustomer joins: " << braceletBooth.back().name << " - " << braceletBooth.back().order << "\n";
+}
+
 int main() {
 	srand(time(0));
 	const int NUM_BOOTHS = 2;
-	list<CoffeeNode> coffeeBooth;	// Linked list for coffee booth.
-	deque<MuffinNode> muffinBooth;	// Deque for muffin booth.
+	list<CoffeeNode> coffeeBooth;		// Linked list for coffee booth.
+	deque<MuffinNode> muffinBooth;		// Deque for muffin booth.
+	vector<BraceletNode> braceletBooth;	// Vector for friendship bracelet booth.
 
 	// Initialize the queue with 3 customers.
 	const int INIT_NUM_CUSTOMERS = 3;
@@ -95,7 +117,7 @@ int main() {
 		cout << "* At the muffin booth:\n";
 		// Serve the customer at the front if the queue is not empty.
 		if (!muffinBooth.empty()) {
-			cout << "\tServed " << muffinBooth.front().name << " - " << muffinBooth.front().order << "\n";
+			cout << "\tServed " << muffinBooth.front().name << " - " << muffinBooth.front().order << " Muffin \n";
 			muffinBooth.pop_front();
 		}
 
@@ -103,6 +125,19 @@ int main() {
 		probability = rand() % 100 + 1;
 		if (probability <= 50) {
 			customerJoins(muffinBooth);
+		}
+
+		cout << "* At the bracelet booth:\n";
+		// Serve the customer at the front if the queue is not empty.
+		if (!braceletBooth.empty()) {
+			cout << "\tServed " << braceletBooth.front().name << " - " << braceletBooth.front().order << " Bracelet \n";
+			braceletBooth.erase(braceletBooth.begin());
+		}
+
+		// 50% chance that someone joins the queue.
+		probability = rand() % 100 + 1;
+		if (probability <= 50) {
+			customerJoins(braceletBooth);
 		}
 	}
 
